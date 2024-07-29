@@ -1,0 +1,25 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon index.js",
+    "start2": "yarn start:docker",
+    "start:default": "node index.js",
+    "start:docker": "docker-compose up --build",
+    "stop:docker": "docker-compose down",
+    "remove:containers": "docker-compose down",
+    "remove:containers:volumes": "docker-compose down --volumes",
+    "remove:containers:images": "docker-compose down --rmi all --volumes"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "pg": "^8.12.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  },
+  "type": "module"
+}

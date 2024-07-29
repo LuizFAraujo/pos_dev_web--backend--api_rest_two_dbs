@@ -1,0 +1,39 @@
+# Dependências Node
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Diretórios do Docker
+docker-compose.override.yml
+Dockerfile
+
+# Diretórios do Yarn
+.yarn/
+.pnp.*
+.yarnrc.yml
+
+# Sistema operacional específico
+.DS_Store
+Thumbs.db
+
+# Editor específico
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Visual Studio Code
+.vscode/
+.vscode/*
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
