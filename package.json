@@ -1,0 +1,43 @@
+{
+  "name": "api-2dbs",
+  "version": "1.0.0",
+  "description": "API para meu projeto usando Node.js, MongoDB e PostgreSQL",
+  "main": "index.js",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start": "node  index.js",
+    "start2": "node --trace-warnings index.js",
+    "start3": "node --no-warnings index.js",
+
+    "dev": "nodemon index.js",
+    "dev1": "nodemon --node-args=\"--no-warnings\" index.js",
+    "dev2": "nodemon index.js",
+    "start:default": "node index.js",
+    "start4": "yarn start:docker",
+    "start5": "yarn remove:containers:volumes && yarn start2",
+    "start:docker": "docker-compose up --build",
+    "stop:docker": "docker-compose down",
+    "remove1": "yarn remove:containers:volumes",
+    "remove2": "yarn remove:containers:images",
+    "remove:containers": "docker-compose down",
+    "remove:containers:volumes": "docker-compose down --volumes",
+    "remove:containers:images": "docker-compose down --rmi all --volumes",
+    "dkbuild": "docker-compose build",
+    "dkstart1": "docker-compose up -d",
+    "dkstart2": "docker-compose up -d --build",
+    "dkstop": "docker-compose down"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.5.2",
+    "pg": "^8.12.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}

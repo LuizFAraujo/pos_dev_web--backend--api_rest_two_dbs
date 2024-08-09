@@ -1,0 +1,5 @@
+# Usa a imagem oficial do PostgreSQL
+FROM postgres:latest
+
+# Copia scripts de inicialização (se houver)
+# COPY ./scripts/ /docker-entrypoint-initdb.d/

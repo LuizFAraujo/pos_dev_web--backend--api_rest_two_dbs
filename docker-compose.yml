@@ -1,49 +1,38 @@
-version: "3.9"
+name: projeto
 
 services:
-  api:
-    build: .
-    image: api_2dbs--node # 'image' é opcional | sem, o nome da fica tipo: pos_dev_web--backend--api_rest_two_dbs-api
-    container_name: api_2dbs--server
+  bd_nosql:
+    build:
+      context: ./DOCKER
+      dockerfile: Dockerfile-BD_NOSQL
+    container_name: mongodb
     ports:
-      - "3000:3000"
-    depends_on:
-      - db_sql
-      - db_nosql
-    environment:
-      SQL_URL: ${SQL_URL}
-      NOSQL_URL: ${NOSQL_URL}
-    volumes:
-      # - .:/app # compartilha a raiz do projeto, com /app no docker, mas não aceita volume nomeado
-      - api_data_volume:/app  # volume nomeado, usar um ou outro
-
-  db_sql:
-    image: postgres:16
-    container_name: api_2dbs--postgres
-    environment:
-      POSTGRES_USER: ${SQL_USER}
-      POSTGRES_PASSWORD: ${SQL_PASSWORD}
-      POSTGRES_DB: ${SQL_DB}
-    volumes:
-      - sql_data_volume:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-
-  db_nosql:
-    image: mongo:latest
-    container_name: api_2dbs--mongo
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${NOSQL_USER}
-      MONGO_INITDB_ROOT_PASSWORD: ${NOSQL_PASSWORD}
+      - "27017:${NOSQL_PORT}"
     volumes:
       - nosql_data_volume:/data/db
+      # - ./BD_NOSQL/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js
+    environment:
+      MONGO_INITDB_DATABASE: ${NOSQL_DB}
+      MONGO_INITDB_ROOT_USERNAME: ${NOSQL_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${NOSQL_PASS}
+
+  bd_sql:
+    build:
+      context: ./DOCKER
+      dockerfile: Dockerfile-BD_SQL
+    container_name: postgresdb
     ports:
-      - "27017:27017"
+      - "5432:${SQL_PORT}"
+    volumes:
+      - sql_data_volume:/var/lib/postgresql/data
+      # - ./BD_SQL/init-postgres.sql:/docker-entrypoint-initdb.d/init-postgres.sql
+    environment:
+      POSTGRES_USER: ${SQL_USER}
+      POSTGRES_PASSWORD: ${SQL_PASS}
+      POSTGRES_DB: ${SQL_DB}
 
 volumes:
-  api_data_volume:
-    name: api_2dbs--api_data_volume
-  sql_data_volume:
-    name: api_2dbs--postgres_data_volume # 'name' é opcional | sem, fica algo tipo: pos_dev_web--backend--api_rest_two_dbs_postgres_data_volume
   nosql_data_volume:
-    name: api_2dbs--nosql_data_volume
+    driver: local
+  sql_data_volume:
+    driver: local
