@@ -1,25 +1,38 @@
-// import "../loadEnv.js";
-import pkg from "pg";
-const { Client } = pkg;
+import { Sequelize } from "sequelize";
+import { sqlString } from "../loadEnv.js"; // Certifique-se de que o caminho está correto
 
-const pgClient = new Client({ connectionString: process.env.SQL_URL_WEB });
+// Configuração do Sequelize
+const sequelize = new Sequelize(sqlString, {
+  dialect: "postgres",
+  logging: false, // Desativar o log de SQL, pode ser útil para ambientes de produção
+});
 
 const connect = async () => {
   try {
-    await pgClient.connect();
-    console.log("Conectado ao PostgreSQL");
+    await sequelize.authenticate();
+    console.log(
+      "\n===== ConectaDbSQL.js ===== :  Conectado ao PostgreSQL com Sequelize"
+    );
   } catch (err) {
-    console.error("Erro ao conectar ao PostgreSQL:", err);
+    console.error(
+      "\n===== ConectaDbSQL.js ===== :  Erro ao conectar ao PostgreSQL com Sequelize:",
+      err
+    );
   }
 };
 
 const disconnect = async () => {
   try {
-    await pgClient.end();
-    console.log("Desconectado do PostgreSQL");
+    await sequelize.close();
+    console.log(
+      "\n===== ConectaDbSQL.js ===== :  Desconectado do PostgreSQL com Sequelize"
+    );
   } catch (err) {
-    console.error("Erro ao desconectar do PostgreSQL:", err);
+    console.error(
+      "\n===== ConectaDbSQL.js ===== :  Erro ao desconectar do PostgreSQL com Sequelize:",
+      err
+    );
   }
 };
 
-export default { connect, disconnect };
+export default { connect, disconnect, sequelize };

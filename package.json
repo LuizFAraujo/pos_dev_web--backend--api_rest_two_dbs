@@ -12,7 +12,6 @@
     "start": "node  index.js",
     "start2": "node --trace-warnings index.js",
     "start3": "node --no-warnings index.js",
-
     "dev": "nodemon index.js",
     "dev1": "nodemon --node-args=\"--no-warnings\" index.js",
     "dev2": "nodemon index.js",
@@ -35,7 +34,9 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "mongoose": "^8.5.2",
-    "pg": "^8.12.0"
+    "pg": "^8.12.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.3"
   },
   "devDependencies": {
     "nodemon": "^3.1.4"

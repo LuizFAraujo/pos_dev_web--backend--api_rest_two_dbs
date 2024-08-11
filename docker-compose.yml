@@ -13,8 +13,8 @@ services:
       # - ./BD_NOSQL/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js
     environment:
       MONGO_INITDB_DATABASE: ${NOSQL_DB}
-      MONGO_INITDB_ROOT_USERNAME: ${NOSQL_USER}
-      MONGO_INITDB_ROOT_PASSWORD: ${NOSQL_PASS}
+      # MONGO_INITDB_ROOT_USERNAME: ${NOSQL_USER}
+      # MONGO_INITDB_ROOT_PASSWORD: ${NOSQL_PASS}
 
   bd_sql:
     build:
@@ -26,6 +26,7 @@ services:
     volumes:
       - sql_data_volume:/var/lib/postgresql/data
       # - ./BD_SQL/init-postgres.sql:/docker-entrypoint-initdb.d/init-postgres.sql
+      # - ./SQL/scripts:/docker-entrypoint-initdb.d
     environment:
       POSTGRES_USER: ${SQL_USER}
       POSTGRES_PASSWORD: ${SQL_PASS}

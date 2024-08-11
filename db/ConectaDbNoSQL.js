@@ -1,23 +1,27 @@
 import mongoose from "mongoose";
-import "../loadEnv.js";
+import { noSqlString } from "../loadEnv.js";
 
-const mongoURI = process.env.NOSQL_URL_WEB;
+// export const mongoURI = process.env.NOSQL_URL_WEB;
 
 const connect = async () => {
   try {
-    await mongoose.connect(mongoURI);
-    console.log("Conectado ao MongoDB");
+    await mongoose.connect(noSqlString);
+    console.log("\n===== ConectaDbNoSQL.js ===== :  Conectado ao MongoDB\n");
   } catch (err) {
-    console.error("Erro ao conectar ao MongoDB:", err);
+    console.error(
+      "\n===== ConectaDbNoSQL.js ===== :  Erro ao conectar ao MongoDB:",
+      err);
   }
 };
 
 const disconnect = async () => {
   try {
     await mongoose.disconnect();
-    console.log("Desconectado do MongoDB");
+    console.log("\n===== ConectaDbNoSQL.js ===== :  Desconectado do MongoDB");
   } catch (err) {
-    console.error("Erro ao desconectar do MongoDB:", err);
+    console.error(
+      "\n===== ConectaDbNoSQL.js ===== :  Erro ao desconectar do MongoDB:",
+      err );
   }
 };
 
