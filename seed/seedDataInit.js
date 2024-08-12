@@ -1,7 +1,8 @@
-import { runCreateDataIfNotExists } from "../db/config/CreateDatabaseSQL.js";
-import { syncDatabase } from "../db/config/syncDatabase.js";
-import { SeedDataMinhaEntidade } from "./nosql/SeedMinhaEntidade.js";
-import { SeedEntidadeTesteSql } from "./sql/SeedEntidadeTesteSql.js";
+import { runCreateDataIfNotExists } from '../db/config/CreateDatabaseSQL.js';
+import { syncDatabase } from '../db/config/syncDatabase.js';
+import { SeedDataUsuario } from './nosql/SeedUsuario.js';
+import { SeedDataProduto } from './nosql/SeedProduto.js'; // Adiciona SeedDataProduto
+import { SeedEntidadeTesteSql } from './sql/SeedEntidadeTesteSql.js';
 
 export async function runSeedDataInit() {
   try {
@@ -11,19 +12,16 @@ export async function runSeedDataInit() {
     // Sincronizar o banco de dados e tabelas
     await syncDatabase();
 
-    // Inicializar dados
-    await SeedDataMinhaEntidade();
+    // Inicializar dados para MongoDB
+    await SeedDataUsuario();
+    await SeedDataProduto();
 
+    // Inicializar dados para SQL
     await SeedEntidadeTesteSql();
 
-    console.log(
-      "\n===== seedDataInit.js ===== :  Inicialização de dados concluída."
-    );
+    console.log('\n===== seedDataInit.js ===== :  Inicialização de dados concluída.');
   } catch (error) {
-    console.error(
-      "\n===== seedDataInit.js ===== :  Erro ao inicializar dados:",
-      error
-    );
+    console.error('\n===== seedDataInit.js ===== :  Erro ao inicializar dados:', error);
   }
 }
 

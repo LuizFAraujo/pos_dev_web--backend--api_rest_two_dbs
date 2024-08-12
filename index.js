@@ -2,7 +2,8 @@ import express from 'express';
 import ConectaDbNoSQL from './db/ConectaDbNoSQL.js';
 import ConectaDbSQL from './db/ConectaDbSQL.js';
 import { port } from './loadEnv.js';
-import MinhaEntidadeRoutes from './routes/nosql/MinhaEntidadeRoutes.js';
+import UsuarioRoutes from './routes/nosql/UsuarioRoutes.js';
+import ProdutoRoutes from './routes/nosql/ProdutoRoutes.js';
 import EntidadeTesteSqlRoutes from './routes/sql/EntidadeTesteSqlRoutes.js';
 
 // Importar na primeira vez, para popular, depois desabilitar
@@ -21,7 +22,8 @@ app.get('/', (req, res) => {
 });
 
 // Usar as rotas
-app.use('/no_sql/entidades', MinhaEntidadeRoutes);
+app.use('/no_sql/usuarios', UsuarioRoutes);
+app.use('/no_sql/produtos', ProdutoRoutes);
 
 app.use('/sql/entidades', EntidadeTesteSqlRoutes);
 
