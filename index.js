@@ -4,7 +4,8 @@ import ConectaDbSQL from './db/ConectaDbSQL.js';
 import { port } from './loadEnv.js';
 import UsuarioRoutes from './routes/nosql/UsuarioRoutes.js';
 import ProdutoRoutes from './routes/nosql/ProdutoRoutes.js';
-import EntidadeTesteSqlRoutes from './routes/sql/EntidadeTesteSqlRoutes.js';
+import ClienteRoutes from './routes/sql/ClienteRoutes.js';
+import CategoriaRoutes from './routes/sql/CategoriaRoutes.js';
 
 // Importar na primeira vez, para popular, depois desabilitar
 // import "./seed/seedDataInit.js";
@@ -25,7 +26,8 @@ app.get('/', (req, res) => {
 app.use('/no_sql/usuarios', UsuarioRoutes);
 app.use('/no_sql/produtos', ProdutoRoutes);
 
-app.use('/sql/entidades', EntidadeTesteSqlRoutes);
+app.use('/sql/clientes', ClienteRoutes);
+app.use('/sql/categorias', CategoriaRoutes);
 
 app.listen(port, () => {
   console.log(`API rodando. Acessar: http://localhost:${port}`);
