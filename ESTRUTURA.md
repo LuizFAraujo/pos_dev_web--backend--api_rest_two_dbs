@@ -20,14 +20,34 @@
 │       ├── CreateDatabaseSQL.js
 │       ├── dataSequelize.js
 │       └── syncDatabase.js
-└── DOCKER/
-    ├── Dockerfile-BD_NOSQL
-    ├── Dockerfile-BD_SQL
-    ├── NOSQL/
-    │   └── scripts/
-    │       └── init-mongo.js
-    └── SQL/
-        └── scripts/
-            └── init-postgres.sql
-
+├── DOCKER/
+│   ├── Dockerfile-BD_NOSQL
+│   ├── Dockerfile-BD_SQL
+│   ├── NOSQL/
+│   │   └── scripts/
+│   │       └── init-mongo.js
+│   └── SQL/
+│       └── scripts/
+│           └── init-postgres.sql
+├── routes/
+│   ├── nosql/
+│   │   ├── ProdutoRoutes.js
+│   │   └── UsuarioRoutes.js
+│   └── sql/
+│       ├── CategoriaRoutes.js
+│       └── ClienteRoutes.js
+└── seed/
+    ├── seedDataInit
+    ├── nosql/
+    │   ├── SeedProduto.js
+    │   ├── SeedUsuario.js
+    │   └── data/
+    │       ├── ProdutosData.sql
+    │       └── UsuariosData.sql
+    └── sql/
+        ├── SeedCategoria.js
+        ├── SeedCliente.js
+        └── data/
+            ├── CategoriasData.sql
+            └── ClientesData.sql
 ```
